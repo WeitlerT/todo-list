@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="main.js" defer></script>
     <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <title>To-Do List</title>
 </head>
 <body>
     <div id="header">
@@ -40,6 +40,29 @@
         <p>
             Built by <a href="https://weitlert.github.io/">WeitlerT <i style="font-size:18px" class="fa">&#xf09b;</i></a>
         </p>
+    </div>
+    <div class="modal-container" id="modalContainer">
+        <div class="modal">
+            <h1>Add To-Do</h1>
+            <form id="myForm">
+                <div class="form-item field">
+                    <label for="title">* Title:</label>
+                    <input type="text" name="title" id="title" required>
+                </div>
+                <div class="form-item field">
+                    <label for="desc">* Desc:</label>
+                    <input type="text" name="desc" id="desc" required>
+                </div>
+                <div class="form-item field">
+                    <label for="date">* Date:</label>
+                    <input type="date" name="date" id="date" required>
+                </div>
+                <div class="form-item btn">
+                    <button type="submit" value="Submit" id="submitBtn">Add To-Do</button>
+                </div>
+            </form>
+            <button id="closeModalBtn">Finish</button>
+        </div>
     </div>
 </body>
 </html>

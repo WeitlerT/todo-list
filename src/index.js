@@ -3,4 +3,5 @@ import Task from "./modules/task";
 
 console.log("Hello world");
 
-UI.getAddButton();
+UI.openModal();
+UI.closeForm();

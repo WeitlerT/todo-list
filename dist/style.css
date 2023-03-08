@@ -10,7 +10,7 @@ body {
     margin: 0px;
 
     display: grid;
-    grid-template-columns: 1fr 5fr;
+    grid-template-columns: 1.5fr 5fr;
     grid-template-rows: 0.5fr 5fr 0.3fr;
 }
 
