@@ -1,3 +1,6 @@
+import Task from "./task";
+import { taskArr } from "./storage";
+
 export default class UI {
 
     static getModal(){
@@ -71,15 +74,22 @@ export default class UI {
 
             const formData = new FormData(form);
 
+            let task = new Task(formData.get("title"), formData.get("desc"), formData.get("date"));
+            console.log(task.getTitle());
+            console.log(task.getDesc());
+
             let tempArr = [];
             for (let item of formData){
                 // console.log(item[0], item[1]);
-                console.log(item[1]);
+                // console.log(item[1]);
                 tempArr.push(item[1]);
             }
             // console.log(tempArr);
             this.addTask(tempArr[0],tempArr[1],tempArr[2]);
             this.removeTask();
+            //let tempObj = {tempArr[0]}
+            // taskArr.push(tempArr[0,1,2]);
+            // console.log(taskArr);
         })
     }
 }
