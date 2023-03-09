@@ -10,13 +10,28 @@ export default class UI {
         return content;
     }
 
+    static removeTask(){
+        const checkbox = document.querySelectorAll(".checkbox");
+        checkbox.forEach((item) => {
+            item.addEventListener('click', (e) => {
+                e.target.parentNode.remove();
+            });
+        })
+    }
+
     static openModal(){
         const addBtn = document.querySelector(".addBtn");
         addBtn.addEventListener("click", () => {
-            console.log("Clicked!");
             this.getModal().classList.add('show');
             this.handleForm();
         });
+    }
+
+    static closeModal(){
+        const closeBtn = document.querySelector("#closeModalBtn");
+        closeBtn.addEventListener('click', () => {
+            this.getModal().classList.remove('show');
+        })
     }
 
     static addTask(titleInput,descInput,dateInput){
@@ -24,6 +39,7 @@ export default class UI {
         container.classList.add("todo-item");
 
         const checkbox = document.createElement('input');
+        checkbox.classList.add("checkbox");
         checkbox.type = "checkbox"
 
         const title = document.createElement('p');
@@ -45,7 +61,6 @@ export default class UI {
         container.appendChild(date);
 
         this.getContent().appendChild(container);
-
     }
 
     static handleForm(){
@@ -64,14 +79,7 @@ export default class UI {
             }
             // console.log(tempArr);
             this.addTask(tempArr[0],tempArr[1],tempArr[2]);
-        })
-    }
-
-    static closeForm(){
-        const closeBtn = document.querySelector("#closeModalBtn");
-
-        closeBtn.addEventListener('click', () => {
-            this.getModal().classList.remove('show');
+            this.removeTask();
         })
     }
 }
