@@ -1,16 +1,11 @@
 import Task from "./task";
-import { taskArr } from "./storage";
+import Storage from "./storage";
+import Project from "./project";
 
 export default class UI {
 
-    static getModal(){
-        const modal = document.querySelector(".modal-container");
-        return modal;
-    }
-
-    static getContent(){
-        const content = document.querySelector("#content");
-        return content;
+    static loadProjects(){
+        Storage.fetchProjects();
     }
 
     static removeTask(){
@@ -18,26 +13,72 @@ export default class UI {
         checkbox.forEach((item) => {
             item.addEventListener('click', (e) => {
                 e.target.parentNode.remove();
+                Storage.removeEntry("Key1");
             });
         })
     }
 
+    static openProjectModal(){
+        const addBtn = document.querySelector(".addProjBtn");
+        const modal = document.querySelector("#projectModalContainer");
+        addBtn.addEventListener("click", () => {
+            modal.classList.add('show');
+            this.handleProjectForm();
+        });
+    }
+
+    static closeProjectModal(){
+        const closeBtn = document.querySelector("#closeProjectModalBtn");
+        const modal = document.querySelector("#projectModalContainer");
+        closeBtn.addEventListener('click', () => {
+            modal.classList.remove('show');
+        })
+    }
+
     static openModal(){
+        const modal = document.querySelector(".modal-container");
         const addBtn = document.querySelector(".addBtn");
         addBtn.addEventListener("click", () => {
-            this.getModal().classList.add('show');
+            modal.classList.add('show');
             this.handleForm();
         });
     }
 
     static closeModal(){
+        const modal = document.querySelector(".modal-container");
         const closeBtn = document.querySelector("#closeModalBtn");
         closeBtn.addEventListener('click', () => {
-            this.getModal().classList.remove('show');
+            modal.classList.remove('show');
+        })
+    }
+
+    static addProject(name){
+        const projList = document.querySelector("#projectList")
+
+        const list = document.createElement('li');
+        list.textContent = name;
+
+        projList.appendChild(list);
+    }
+
+    static handleProjectForm(){
+        const form = document.querySelector("#projectForm");
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(form);
+
+            let project = new Project(formData.get("name"));
+            
+            this.addProject(formData.get("name"));
+            Storage.addEntry(formData.get("name"), project);
         })
     }
 
     static addTask(titleInput,descInput,dateInput){
+        const content = document.querySelector("#content")
+
         const container = document.createElement('div');
         container.classList.add("todo-item");
 
@@ -63,11 +104,11 @@ export default class UI {
         container.appendChild(desc);
         container.appendChild(date);
 
-        this.getContent().appendChild(container);
+        content.appendChild(container);
     }
 
     static handleForm(){
-        const form = document.querySelector("#myForm");
+        const form = document.querySelector("#todoForm");
 
         form.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -75,8 +116,8 @@ export default class UI {
             const formData = new FormData(form);
 
             let task = new Task(formData.get("title"), formData.get("desc"), formData.get("date"));
-            console.log(task.getTitle());
-            console.log(task.getDesc());
+            // console.log(task.getTitle());
+            // console.log(task.getDesc());
 
             let tempArr = [];
             for (let item of formData){
@@ -84,12 +125,10 @@ export default class UI {
                 // console.log(item[1]);
                 tempArr.push(item[1]);
             }
-            // console.log(tempArr);
+            
             this.addTask(tempArr[0],tempArr[1],tempArr[2]);
             this.removeTask();
-            //let tempObj = {tempArr[0]}
-            // taskArr.push(tempArr[0,1,2]);
-            // console.log(taskArr);
+            // Storage.addEntry(proj, task);
         })
     }
 }

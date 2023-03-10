@@ -10,41 +10,47 @@
     <title>To-Do List</title>
 </head>
 <body>
+
     <div id="header">
         <h1>To-Do List</h1>
     </div>
+
     <div id="sidebar">
-        <ul>
-            <li>Home</li>
+        <h2>Projects</h2>
+        <ul id="projectList">
+            <li>Default</li>
         </ul>
-        <ul>
-            <li>Projects</li>
-        </ul>
-        <button class="button-20 addBtn">+</button>
+        <button class="button-20 addProjBtn">+ Add Project</button>
     </div>
-    <div id="content">
-        <div class="todo-item">
-            <input type="checkbox" name="" class="checkbox">
-            <p>Title</p>
-            <p>Desc</p>
-            <p>Date: Jan 9</p>
+
+    <div id="content-wrapper">
+        <div id="content">
+            <div class="todo-item">
+                <input type="checkbox" name="" class="checkbox">
+                <p>Title</p>
+                <p>Desc</p>
+                <p>Date: Jan 9</p>
+            </div>
+            <div class="todo-item">
+                <input type="checkbox" name="" class="checkbox">
+                <p>Title</p>
+                <p>Desc</p>
+                <p>Date: Jan 9</p>
+            </div>
         </div>
-        <div class="todo-item">
-            <input type="checkbox" name="" class="checkbox">
-            <p>Title</p>
-            <p>Desc</p>
-            <p>Date: Jan 9</p>
-        </div>
+        <button class="button-20 addBtn">+ Add Todo</button>
     </div>
+
     <div id="footer">
         <p>
             Built by <a href="https://weitlert.github.io/">WeitlerT <i style="font-size:18px" class="fa">&#xf09b;</i></a>
         </p>
     </div>
+
     <div class="modal-container" id="modalContainer">
         <div class="modal">
             <h1>Add To-Do</h1>
-            <form id="myForm">
+            <form id="todoForm">
                 <div class="form-item field">
                     <label for="title">* Title:</label>
                     <input type="text" name="title" id="title" required>
@@ -61,8 +67,25 @@
                     <button type="submit" value="Submit" id="submitBtn">Add To-Do</button>
                 </div>
             </form>
-            <button id="closeModalBtn">Finish</button>
+            <button id="closeModalBtn">X</button>
         </div>
     </div>
+
+    <div id="projectModalContainer">
+        <div id="projectModal">
+            <h1>Add Project</h1>
+            <form id="projectForm">
+                <div class="form-item field">
+                    <label for="name">* Name:</label>
+                    <input type="text" name="name" id="name" required>
+                </div>
+                <div class="form-item btn">
+                    <button type="submit" value="Submit" id="submitBtn">Add Project</button>
+                </div>
+            </form>
+            <button id="closeProjectModalBtn">X</button>
+        </div>
+    </div>
+
 </body>
 </html>
